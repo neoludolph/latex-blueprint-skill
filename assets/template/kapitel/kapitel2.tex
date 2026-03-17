@@ -1,0 +1,272 @@
+\ihead{LaTeX Beispiele}
+\chapter{Beispiele innerhalb der LaTeX-Vorlage}
+
+Dieses Kapitel zeigt typische Elemente, die in dieser LaTeX-Vorlage bereits vorbereitet sind.
+
+\section{Zitate und Literaturverzeichnis}
+Das Literaturmanagement ist in der Vorlage vorkonfiguriert. Beispielzitate:
+\begin{itemize}
+    \item Leitfaden zum wissenschaftlichen Schreiben mit LaTeX: \cite{mustermann2023}.
+    \item Beispielartikel zur Vorlagenarbeit: \cite{doe2024}.
+    \item Offizielle Projektseite von LaTeX: \cite{latexproject}.
+\end{itemize}
+Das Literaturverzeichnis wird aus der Datei \texttt{bib/literatur.bib} automatisch erzeugt.
+
+\section{Abkürzungen (Akronyme)}
+Abkürzungen werden zentral in \texttt{meta/abkuerzungsverzeichnis.tex} gepflegt und im Text mit dem \texttt{acronym}-Paket verwendet:
+\begin{itemize}
+    \item Erste Verwendung von \ac{LATEX}.
+    \item Literaturarbeit mit \ac{BIBTEX}.
+    \item Ausgabeformat der Arbeit: \ac{PDF}.
+    \item Automatisch erzeugte Verzeichnisse: \ac{TOC}, \ac{LOF}, \ac{LOT}, \ac{LOL}.
+\end{itemize}
+
+\section{Abbildungen}
+Abbildungen werden in der \texttt{figure}-Umgebung eingefügt. Ein Beispiel zeigt Abbildung \ref{fig:beispiel}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{bilder/Schaevenstraße.jpg}
+    \caption{Beispielabbildung in der LaTeX-Vorlage}
+    \label{fig:beispiel}
+\end{figure}
+
+\section{Tabellen}
+Die folgende Tabelle zeigt eine einfache tabellarische Darstellung.
+
+\begin{table}[H]
+    \centering
+    \caption{Einfache Beispieltabelle}
+    \label{tab:beispiel}
+    \begin{tabular}{|l|c|r|}
+        \hline
+        \textbf{Element} & \textbf{Anzahl} & \textbf{Status} \\
+        \hline
+        Kapiteldateien & 2 & aktiv \\
+        Anhangsdateien & 7 & vorbereitet \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Die anschließende Tabelle zeigt eine Nutzwertanalyse für Diagrammoptionen innerhalb dieser LaTeX-Vorlage.
+
+\begin{table}[H]
+    \begin{center}
+    \scriptsize
+    \caption{Nutzwertanalyse für Diagrammoptionen in der LaTeX-Vorlage}
+    \label{tabelle:nutzwertanalyse_diagramme}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            \multirow{2}{*}{Kriterien} & \multirow{2}{*}{Gewichtung} & \multicolumn{2}{c|}{\makecell{PNG/JPG}} & \multicolumn{2}{c|}{\makecell{TikZ}} & \multicolumn{2}{c|}{\makecell{Mermaid \\ (extern)}} \\
+            \cline{3-8}
+             &  & Bew. & Ges. & Bew. & Ges. & Bew. & Ges. \\
+            \hline
+            \makecell{Einrichtungsaufwand} & 20\% & 5 & 1,00 & 3 & 0,60 & 4 & 0,80 \\
+            \makecell{Typografische \\ Konsistenz} & 25\% & 2 & 0,50 & 5 & 1,25 & 4 & 1,00 \\
+            \makecell{Anpassbarkeit im \\ Quelltext} & 25\% & 1 & 0,25 & 5 & 1,25 & 4 & 1,00 \\
+            \makecell{Kompilier- \\ geschwindigkeit} & 15\% & 5 & 0,75 & 2 & 0,30 & 3 & 0,45 \\
+            \makecell{Wiederverwendbarkeit} & 15\% & 3 & 0,45 & 4 & 0,60 & 5 & 0,75 \\
+            \hline
+            GESAMT & 100\% & - & 2,95 & - & 4,00 & - & 4,00 \\
+            \hline
+    \end{tabular}
+    \end{center}
+\end{table}
+
+\section{Mathematische Syntax}
+Die folgenden Beispiele zeigen haeufig benoetigte mathematische Notation in LaTeX.
+
+\subsection{Logarithmen mit Basis}
+\begin{equation}
+    \log_2(64) = 6,
+    \qquad
+    \log_a(x) = \frac{\ln(x)}{\ln(a)}
+    \quad \text{mit} \quad a > 0,\; a \neq 1,\; x > 0.
+    \label{eq:logarithmen}
+\end{equation}
+
+\subsection{Matrizen}
+\begin{equation}
+    A =
+    \begin{bmatrix}
+        1 & 2 \\
+        3 & 4
+    \end{bmatrix},
+    \qquad
+    B =
+    \begin{bmatrix}
+        0 & 1 \\
+        -1 & 2
+    \end{bmatrix},
+    \qquad
+    A \cdot B =
+    \begin{bmatrix}
+        -2 & 5 \\
+        -4 & 11
+    \end{bmatrix}.
+    \label{eq:matrizen}
+\end{equation}
+
+\subsection{Integrale}
+\begin{equation}
+    \int_0^{\pi} \sin(x)\,\mathrm{d}x = 2,
+    \qquad
+    \int_1^{e} \frac{1}{x}\,\mathrm{d}x = 1,
+    \qquad
+    \int_{-\infty}^{\infty} e^{-x^2}\,\mathrm{d}x = \sqrt{\pi}.
+    \label{eq:integrale}
+\end{equation}
+
+\subsection{Abbildung von Graphen mit TikZ}
+Die folgende Abbildung zeigt zwei Funktionen, die direkt in LaTeX gezeichnet werden.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=1.0]
+        \draw[step=1cm,gray!20,very thin] (0,0) grid (4,4);
+        \draw[->,thick] (-0.2,0) -- (4.4,0) node[right] {$x$};
+        \draw[->,thick] (0,-0.2) -- (0,4.4) node[above] {$y$};
+
+        \draw[domain=0:4,samples=120,smooth,thick,blue!70!black] plot ({\x},{ln(\x + 1)});
+        \draw[domain=0:2,samples=120,smooth,thick,dashed,orange!85!black] plot ({\x},{\x*\x});
+
+        \node[blue!70!black,anchor=west] at (2.35,1.6) {\scriptsize $f(x)=\ln(x+1)$};
+        \node[orange!85!black,anchor=west] at (2.1,3.9) {\scriptsize $g(x)=x^2$};
+    \end{tikzpicture}
+    \caption{Beispiel fuer eine Funktionsabbildung direkt in LaTeX mit TikZ}
+    \label{fig:mathe-graphen}
+\end{figure}
+
+\begin{lstlisting}[language={}, caption={Mathematische Syntax in LaTeX (Logarithmen, Matrizen, Integrale)}, label={code:mathe-syntax}]
+\begin{equation}
+    \log_2(64) = 6,\qquad \log_a(x) = \frac{\ln(x)}{\ln(a)}
+\end{equation}
+
+\begin{equation}
+    A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+    \int_0^{\pi} \sin(x)\,\mathrm{d}x = 2
+\end{equation}
+\end{lstlisting}
+
+\section{Quellcode}
+Für Quellcodebeispiele ist das \texttt{listings}-Paket eingebunden.
+
+\begin{lstlisting}[language=Python, caption={Beispielhafter Build-Ablauf fuer die LaTeX-Vorlage}, label={code:python}]
+import subprocess
+
+steps = [
+    "pdflatex dokument.tex",
+    "bibtex dokument",
+    "pdflatex dokument.tex",
+    "pdflatex dokument.tex",
+]
+
+for step in steps:
+    subprocess.run(step, shell=True, check=True)
+\end{lstlisting}
+
+Referenz auf das Codebeispiel: \ref{code:python}.
+
+\section{Mermaid-Diagramm}
+Mermaid-Diagramme koennen als Quelltext dokumentiert und als Abbildungen inhaltlich gespiegelt werden.
+
+\subsection{Flowchart}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        >={Stealth[length=3mm]},
+        line/.style={draw=black!70, thick, ->},
+        term/.style={draw=teal!60!black, fill=teal!15, rounded corners=2pt, minimum width=3.0cm, minimum height=0.9cm, align=center, font=\small},
+        process/.style={draw=blue!60!black, fill=blue!10, rounded corners=2pt, minimum width=3.6cm, minimum height=0.95cm, align=center, font=\small},
+        inputstep/.style={draw=violet!60!black, fill=violet!10, rounded corners=2pt, minimum width=3.4cm, minimum height=0.95cm, align=center, font=\small},
+        decision/.style={draw=orange!70!black, fill=orange!20, diamond, aspect=2.2, minimum width=3.6cm, minimum height=1.2cm, align=center, inner sep=1pt, font=\small}
+    ]
+        \node[term] (start) at (0,0) {Start};
+        \node[decision] (check) at (0,-2.0) {Quellen aktuell?};
+        \node[process] (compile) at (0,-4.2) {PDF kompilieren};
+        \node[inputstep] (update) at (-4.9,-4.2) {Bib-Datei ergaenzen};
+        \node[process] (review) at (0,-6.2) {Ergebnis pruefen};
+        \node[term] (end) at (0,-8.1) {Ende};
+
+        \draw[line] (start) -- (check);
+        \draw[line] (check) -- node[right, font=\scriptsize] {Ja} (compile);
+        \draw[line] (check.west) -- ++(-1.2,0) -| node[pos=0.25, above, font=\scriptsize] {Nein} (update.north);
+        \draw[line] (update.east) -- ++(1.1,0) |- (compile.west);
+        \draw[line] (compile) -- (review);
+        \draw[line] (review) -- (end);
+    \end{tikzpicture}
+    \caption{Gerendertes Mermaid-Beispiel (Flowchart fuer den Build-Prozess)}
+    \label{fig:mermaid}
+\end{figure}
+
+\begin{lstlisting}[language={}, caption={Mermaid-Beispiel (Flowchart fuer den Build-Prozess)}, label={code:mermaid}]
+flowchart TD
+    A[Start] --> B{Quellen aktuell?}
+    B -->|Ja| C[PDF kompilieren]
+    B -->|Nein| D[Bib-Datei ergaenzen]
+    D --> C
+    C --> E[Ergebnis pruefen]
+    E --> F[Ende]
+\end{lstlisting}
+
+Referenz auf das gerenderte Diagramm: \ref{fig:mermaid}. Referenz auf die Mermaid-Quelle: \ref{code:mermaid}.
+
+\subsection{Gantt-Diagramm mit Meilensteinen}
+
+\begin{figure}[H]
+    \centering
+    \begin{ganttchart}[
+        hgrid,
+        vgrid,
+        x unit=0.90cm,
+        y unit chart=0.70cm,
+        title/.append style={fill=teal!15, draw=teal!70!black, rounded corners=1pt},
+        title label font=\scriptsize\bfseries\color{teal!80!black},
+        group/.append style={fill=teal!20, draw=teal!70!black, rounded corners=1pt},
+        group label font=\scriptsize\bfseries\color{teal!80!black},
+        bar/.append style={fill=blue!12, draw=blue!65!black, rounded corners=1pt},
+        bar label font=\scriptsize,
+        milestone/.append style={fill=orange!70, draw=orange!90!black},
+        milestone label font=\scriptsize\bfseries\color{orange!90!black}
+    ]{1}{10}
+        \gantttitle{Projektzeitraum (Wochen)}{10} \\
+        \gantttitlelist{1,...,10}{1} \\
+        \ganttgroup{Planung}{1}{2} \\
+        \ganttbar[bar/.append style={fill=violet!12, draw=violet!70!black}]{Struktur festlegen}{1}{2} \\
+        \ganttgroup{Schreibphase}{3}{8} \\
+        \ganttbar{Kapitelentwurf}{3}{6} \\
+        \ganttbar{Abbildungen und Tabellen}{5}{7} \\
+        \ganttbar[bar/.append style={fill=blue!20, draw=blue!75!black}]{Quellen einarbeiten}{7}{8} \\
+        \ganttgroup{Finalisierung}{9}{10} \\
+        \ganttbar[bar/.append style={fill=teal!12, draw=teal!70!black}]{Layout- und Sprachcheck}{9}{10} \\
+        \ganttmilestone{MS: Rohfassung}{7} \\
+        \ganttmilestone{MS: Abgabe-PDF}{10}
+    \end{ganttchart}
+    \caption{Gerendertes Mermaid-Beispiel (Gantt mit Meilensteinen)}
+    \label{fig:mermaid-gantt}
+\end{figure}
+
+\begin{lstlisting}[language={}, caption={Mermaid-Beispiel (Gantt mit Meilensteinen)}, label={code:mermaid-gantt}]
+gantt
+    title Schreib- und Build-Plan der LaTeX-Vorlage
+    dateFormat  YYYY-MM-DD
+    axisFormat  %W
+
+    section Planung
+    Struktur festlegen        :a1, 2026-03-03, 14d
+
+    section Schreibphase
+    Kapitelentwurf            :a2, after a1, 28d
+    Abbildungen und Tabellen  :a3, after a2, 14d
+    Quellen einarbeiten       :a4, after a3, 7d
+
+    section Meilensteine
+    Rohfassung                :milestone, m1, 2026-04-21, 0d
+    Abgabe-PDF                :milestone, m2, 2026-05-05, 0d
+\end{lstlisting}
+
+Referenz auf das gerenderte Gantt-Diagramm: \ref{fig:mermaid-gantt}. Referenz auf die Mermaid-Quelle: \ref{code:mermaid-gantt}.

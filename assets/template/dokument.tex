@@ -1,0 +1,356 @@
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%% Hauptdatei, Wurzel des Dokuments
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%
+%  Gerüst:
+%  * Version 0.13
+%  * M.Sc. Silvia Krug, silvia.krug@tu-ilmenau.de
+%  * Fachgebiet Kommunikationsnetze, TU Ilmenau
+%
+%  Für Hauptseminare, Studienarbeiten, Diplomarbeiten
+%
+%  Autor           : Max Mustermann
+%  Letzte Änderung : 04.12.2015
+%
+
+% Headerfeld, Typ des Dokumentes, einzubindende Packages.
+% Hier bei Bedarf Änderungen vornehmen.
+\documentclass
+[   twoside=false,     % Einseitiger oder zweiseitiger Druck?
+    fontsize=12pt,     % Bezug: 12-Punkt Schriftgröße
+    DIV=15,            % Randaufteilung, siehe Dokumentation "KOMA"-Script
+    BCOR=17mm,         % Bindekorrektur: Innen 17mm Platz lassen. Copyshop-getestet.
+%    headsepline,
+    headsepline,  % Unter Kopfzeile Trennlinie (aus: headnosepline)
+    footsepline,  % Über Fußzeile Trennlinie (aus: footnosepline)
+  open=any,          % Kapitel/Verzeichnisse nicht auf rechte Seite erzwingen
+    paper=a4,          % Seitenformat A4
+    abstract=true,     % Abstract einbinden
+    listof=totoc,      % Div. Verzeichnisse ins Inhaltsverzeichnis aufnehmen
+    bibliography=totoc,% Literaturverzeichnis ins Inhaltsverzeichnis aufnehmen
+    titlepage,         % Titelseite aktivieren
+    headinclude=true,  % Seiten-Head in die Satzspiegelberechnung mit einbeziehen
+    footinclude=false, % Seiten-Foot nicht in die Satzspiegelberechnung mit einbeziehen
+    numbers=noenddot   % Gliederungsnummern ohne abschließenden Punkt darstellen
+]   {scrreprt}         % Dokumentenstil: "Report" aus dem KOMA-Skript-Paket
+
+
+\usepackage{makecell} % Im Header Ihrer LaTeX-Datei einfügen
+\usepackage{slantsc}
+\usepackage{caption}
+% Caption-Package so konfigurieren, dass vollständige Nummerierung in Verzeichnissen verwendet wird
+\captionsetup{listformat=simple,font=small,labelfont=bf}
+% Wissenschaftlicher Standard:
+% - Abbildungsunterschriften unter der Abbildung
+% - Tabellenüberschriften über der Tabelle
+\captionsetup[figure]{position=bottom,justification=raggedright,singlelinecheck=false}
+\captionsetup[table]{position=top,justification=raggedright,singlelinecheck=false}
+\usepackage{multirow}
+\usepackage[active]{srcltx}
+%\usepackage[activate=normal]{pdfcprot} % Optischer Randausgleich -> pdflatex!
+\usepackage{ifthen}
+\usepackage[ngerman]{babel}   % Neue Deutsche Rechtschreibung
+\usepackage{iftex}
+\ifPDFTeX
+%\usepackage[latin1]{inputenc} % Zeichencodierung nach ISO-8859-1
+\usepackage[utf8]{inputenc}   % Zeichencodierung nach UTF-8 (Unicode)
+\usepackage[T1]{fontenc}
+%\usepackage{ae} % obsolet und durch lmodern ersetzt
+\usepackage{lmodern}
+\else
+\usepackage{fontspec}
+\fi
+\usepackage{microtype} % Bessere Silbentrennung, Zeichenprotrusion, weniger Overfull/Underfull
+\usepackage{parskip}   % Absätze durch Abstand statt Einrückung trennen (wie in Word)
+\usepackage[T1]{url}
+\usepackage[final]{graphicx}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+\usepackage{amsmath}
+\usetikzlibrary{arrows.meta,shapes.geometric}
+\usepackage{float}         % Option H für exakte Float-Positionierung
+\floatplacement{figure}{H} % Standard: Abbildungen an der definierten Stelle setzen
+\floatplacement{table}{H}  % Standard: Tabellen an der definierten Stelle setzen
+\usepackage[section]{placeins} % Verhindert, dass Floats die Sektion verlassen
+\usepackage{needspace}     % Reserviert Platz, um Überschrift + Inhalt zusammenzuhalten
+\usepackage[automark]{scrlayer-scrpage}
+\usepackage{setspace}
+\usepackage{acro}
+\acsetup{
+  list/display = used,
+  make-links = true
+}
+\input{meta/abkuerzungen.tex}
+%\usepackage[first,light]{draftcopy} % Für Probedruck
+\usepackage[plainpages=false,pdfpagelabels,hypertexnames=false]{hyperref}
+\usepackage[ngerman]{babel}  % Für deutsche Spracheinstellungen
+\usepackage{datetime}        % Für Datumsformatierung
+
+\usepackage{caption}
+\captionsetup{justification=centering}
+
+% Definiere ein neues Datumsformat
+\newdateformat{german}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+\usepackage{url}  % For typesetting URLs if required
+\usepackage{xurl} % Besserer Zeilenumbruch für lange URLs und Pfade
+\usepackage{siunitx} % Einheitliche Zahlen- und Einheitenformatierung
+\sisetup{
+  locale=DE,
+  output-decimal-marker={,},
+  group-separator={.},
+  group-minimum-digits=4
+}
+
+\usepackage{verbatim} % Ermöglicht die Verwendung der verbatim-Umgebung
+%\usepackage{fontspec}
+\usepackage[htt]{hyphenat} % Erlaubt Silbentrennung in \texttt{} (Typewriter)
+
+% Zitate, Quotes, Cite
+\usepackage[backend=bibtex, sorting=nyt, style=ieee-alphabetic, minalphanames=1, maxbibnames=99]{biblatex}
+\addbibresource{bib/literatur.bib}  % Pfad zur Literaturdatenbank
+
+\DeclareLabelalphaTemplate{
+  \labelelement{
+    \field[final]{shorthand}
+    \field{label}
+    \field[strwidth=3,strside=left]{labelname}
+  }
+  \labelelement{
+    \field[strwidth=2,strside=right]{year}    
+  }
+}
+\usepackage{csquotes}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily\small},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3,
+  captionpos=b,      % Position der Beschriftung (bottom)
+  escapeinside={(*@}{@*)}, % Ermöglicht LaTeX-Befehle innerhalb von Code
+  literate={ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1 {Ä}{{\"A}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1 {ß}{{\ss}}1
+}
+
+% Umbenennung von "Listing" zu "Codebeispiel"
+\renewcommand{\lstlistingname}{Codebeispiel}
+\renewcommand{\lstlistlistingname}{Codebeispielverzeichnis}
+
+% Tiefe der Kapitelnummerierung beeinflussen
+\setcounter{secnumdepth}{3} % Tiefe der Nummerierung
+\setcounter{tocdepth}{3}    % Tiefe des Inhaltsverzeichnisses
+
+% Eigene Befehle
+\newcommand{\uproman}[1]{\uppercase\expandafter{\romannumeral#1}}
+% Quellenangaben unter Abbildungen/Tabellen (wissenschaftlicher Standard)
+
+% Vermeidet Schusterjungen/Hurenkinder (einzelne Zeilen am Seitenanfang/-ende)
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Hier in die zweite geschweifte Klammer jeweils
+% die persönlichen Daten und das Thema der Arbeit eintragen:
+\newcommand{\artderausarbeitung}{Art der Ausarbeitung}
+\newcommand{\namedesautors}{Max Mustermann}
+\newcommand{\matrikelnummer}{1234567}
+\newcommand{\themaderarbeit}{Titel der Arbeit}
+\newcommand{\fachbereich}{Fachbereich}
+\newcommand{\studiengang}{Studiengang}
+\newcommand{\praxispartner}{Musterfirma GmbH} 
+\newcommand{\ort}{Musterstadt}
+
+% PDF Metadaten definieren  
+\hypersetup{
+   pdftitle={\themaderarbeit},
+   pdfsubject={\artderausarbeitung},
+   pdfauthor={\namedesautors},
+   pdfkeywords={\artderausarbeitung; LaTeX; Vorlage;},
+   colorlinks=false,       % Keine farbigen Links
+   allbordercolors={0 0 0},% Alle Umrandungen schwarz
+   pdfborderstyle={/S/U/W 1} % Unterstrichen (Underline) mit 1pt Breite
+}
+
+\usepackage[normalem]{ulem}
+  \newcommand{\markup}[1]{\textbf{#1}}
+
+
+
+% Seitenlayout festlegen. Hier nichts ändern!
+\pagestyle{scrplain}
+\ihead[]{\headmark}
+\ohead[]{}
+\chead[]{}
+\ifoot[]{\scriptsize \artderausarbeitung\ \namedesautors}
+\ofoot[]{\pagemark}
+\cfoot[]{}
+\renewcommand{\titlepagestyle}{scrheadings}
+\renewcommand{\partpagestyle}{scrheadings}
+\renewcommand{\chapterpagestyle}{scrheadings}
+\renewcommand{\indexpagestyle}{scrheadings}
+
+% Abschnittsweise Nummerierung anstatt fortlaufend. Hier nichts ändern!
+\makeatletter
+\@addtoreset{equation}{chapter}
+\@addtoreset{figure}{chapter}
+\@addtoreset{table}{chapter}
+\renewcommand\theequation{\thechapter.\@arabic\c@equation}
+\renewcommand\thefigure{\thechapter.\@arabic\c@figure}
+\renewcommand\thetable{\thechapter.\@arabic\c@table}
+\makeatother
+
+% Formatierung für Verzeichnisse: vollständige Nummerierung anzeigen
+% KOMA-Script bietet spezielle Befehle für die Verzeichnisformatierung
+\DeclareTOCStyleEntry[numwidth=2.5em]{tocline}{figure}
+\DeclareTOCStyleEntry[numwidth=2.5em]{tocline}{table}
+
+% Quelltextrahmen, klein. Hier nichts ändern!
+\newsavebox{\inhaltkl}
+\def\rahmenkl{\sbox{\inhaltkl}\bgroup\small\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmenkl{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhaltkl}}}
+
+% Quelltextrahmen, normale Groesse. Hier nichts ändern!
+\newsavebox{\inhalt}
+\def\rahmen{\sbox{\inhalt}\bgroup\renewcommand{\baselinestretch}{1}\vbox\bgroup\hsize\textwidth}
+\def\endrahmen{\par\vskip-\lastskip\egroup\egroup\fboxsep3mm%
+\framebox[\textwidth][l]{\usebox{\inhalt}}}
+
+% Trennvorschläge für falsch getrennte Wörter.
+\hyphenation{
+Hard-ware
+Daten-verarbeitungs-prozess
+Projekt-ordner-struktur
+Konvertierungs-logik
+Validierungs-strategie
+Abbildungs-verzeichnis
+Tabellen-verzeichnis
+Codebeispiel-verzeichnis
+}
+
+% Sonstige Befehlsdefinitionen hier ablegen.
+\newcommand{\entspricht}{\stackrel{\wedge}{=}}
+
+% Tabellenspaltendefinitionen mit fester Breite --> somit Zeilenumbruch innerhalb einer Zelle möglich
+% aus http://www.torsten-schuetze.de/tex/tabsatz-2004.pdf
+\usepackage{array, booktabs}
+\newcolumntype{f}{>{$}l<{$}}
+\newcolumntype{n}{>{\raggedright}l}
+\newcolumntype{N}{>{\scriptsize}l}
+\newcolumntype{v}[1]{>{\raggedright\hspace{0pt}}m{#1}}
+\newcolumntype{V}[1]{>{\scriptsize\raggedright\hspace{0pt}}m{#1}}
+\newcolumntype{Z}[1]{>{\raggedright\centering}m{#1}}
+\newcolumntype{k}[1]{>{\raggedright}p{#1}}
+% ergibt Tabllenspalte fester Breite, linksbündig
+% Umbruch innerhalb der Zelle mit \\, neue Tabellezeile mit \tabularnewline
+% \addlinespace für Gruppentrennung (aus \texttt{booktabs.sty})
+
+
+
+
+% Anpassung der Abstände bei Kapitelüberschriften
+\RedeclareSectionCommand[
+  beforeskip=-10pt, % Abstand über der Überschrift (Standard ca. 50pt)
+  afterskip=20pt    % Abstand unter der Überschrift
+]{chapter}
+
+\begin{document}
+% Verhindere, dass \cleardoublepage Leerseiten erzeugt (insb. bei open=any)
+\makeatletter
+\let\cleardoublepage\clearpage
+\makeatother
+% Global etwas mehr Spielraum für Umbrüche zur Reduktion von Overfull \hbox-Fehlern
+\emergencystretch=2em
+  
+\onehalfspacing
+\input{meta/titelblatt.tex}
+%\input{meta/vorwort.tex}
+%\input{meta/kurzfassung.tex}
+
+
+% Inhaltsverzeichnis
+\cleardoublepage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+\pagenumbering{Roman} % Nummerierung der Seiten ab hier: i, ii, iii, iv...
+\pagestyle{scrheadings} % Ab hier mit Kopf- und Fusszeile
+
+% Abkürzungsverzeichnis einbinden
+\input{meta/abkuerzungsverzeichnis.tex}
+
+
+\clearpage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+
+
+\ihead[]{Inhaltsverzeichnis}
+\tableofcontents
+
+
+\cleardoublepage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+% \input{meta/hinweise.tex} % Einleitung
+
+% Die einzelnen Kapitel
+\cleardoublepage % Seitenumbruch erzwingen vor Änderung des Nummerierungsstils
+\pagenumbering{arabic} % Nummerierung der Seiten ab hier: 1, 2, 3, 4...
+\input{kapitel/kapitel1.tex}
+\input{kapitel/kapitel2.tex}
+%\input{kapitel/kapitel3.tex}
+%\input{kapitel/kapitel4.tex}
+%\input{kapitel/kapitel5.tex}
+%\input{kapitel/kapitel6.tex}
+
+
+\clearpage
+
+% Abbildungsverzeichnis einbinden
+\appendix
+% Alphamerische Seitennummerierung (A-1, A-2...) sorgt für maximale Klarheit und Trennung vom Hauptteil
+\pagenumbering{Alph}
+\renewcommand{\thepage}{A-\arabic{page}}
+\setcounter{page}{1}
+% Eigene Nummerierung fuer Objekte im Anhang: A.1, A.2, ...
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{lstlisting}{0}
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\renewcommand{\thetable}{A.\arabic{table}}
+\renewcommand{\thelstlisting}{A.\arabic{lstlisting}}
+
+\input{anhang/anhang_abbildungsverzeichnis.tex}
+
+% Tabellenverzeichnis einbinden
+\input{anhang/anhang_tabellenverzeichnis.tex}
+
+% Codebeispielverzeichnis einbinden
+\input{anhang/anhang_codebeispielverzeichnis.tex}
+
+
+% Literaturverzeichnis einbinden
+\input{anhang/anhang_literaturverzeichnis.tex}
+
+
+\input{anhang/anhang_tabellen.tex}
+\input{anhang/anhang_abbildungen.tex}
+\input{anhang/anhang_codebeispiele.tex}
+
+% Thesen
+%\input{meta/thesen.tex}
+
+% Abschlusserklärung
+\input{meta/abschlusserklaerung.tex}
+\end{document}

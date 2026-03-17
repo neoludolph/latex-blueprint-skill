@@ -1,0 +1,43 @@
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+%% Thesenpapier, als Handout
+%% ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+% Headerfeld, Typ des Dokumentes, einzubindende Packages.
+% Hier bei Bedarf Änderungen vornehmen.
+\documentclass
+[   fontsize=12pt,     % Bezug: 12-Punkt Schriftgröße
+    DIV=15,            % Randaufteilung, siehe Dokumentation "KOMA"-Script
+    paper=a4           % Seitenformat A4
+]   {scrreprt}         % Verwende "Report" aus KOMA-Skript-Paket
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{url}
+\usepackage{graphicx}
+\usepackage{scrlayer-scrpage}
+\usepackage{datetime}
+
+% Definiere ein neues Datumsformat
+\newdateformat{german}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+
+% Seitenlayout festlegen. Hier nichts ändern!
+\pagestyle{scrplain}
+\ihead[]{}
+\ohead[]{}
+\chead[]{}
+\ifoot[]{}
+\ofoot[]{}
+\cfoot[]{}
+
+% Hier in die zweite geschweifte Klammer jeweils
+% die persönlichen Daten eintragen:
+\newcommand{\artderausarbeitung}{Art der Ausarbeitung}
+\newcommand{\namedesautors}{Max Mustermann}
+\newcommand{\ort}{Musterstadt}
+
+\begin{document}
+% Pfad anpassen, falls nötig
+\input{../meta/thesen.tex}
+\end{document}
