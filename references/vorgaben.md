@@ -15,6 +15,8 @@ Nutze diese Referenz, wenn eine deutschsprachige wissenschaftliche Arbeit in das
 - Halte Vorspann und Verzeichnisse weiter in `meta/` beziehungsweise `anhang/`; diese Elemente gehoeren nicht in die normale Kapitelreihenfolge.
 - Belasse die Template-Architektur insgesamt unveraendert, auch wenn die inhaltliche Gliederung projektspezifisch ist.
 - Entferne oder ersetze Beispielkapitel, sobald die echte Struktur feststeht.
+- Wenn Mermaid inhaltlich sinnvoll ist, schreibe den Mermaid-Quelltext in die passende Kapiteldatei, typischerweise als `lstlisting` direkt bei der fachlichen Erlaeuterung.
+- Wenn ein Diagramm im PDF sichtbar sein soll, ergaenze zum Mermaid-Quelltext eine LaTeX-native Darstellung statt auf ein direktes Mermaid-Rendering in LaTeX zu vertrauen.
 
 ## Optionale Strukturmuster
 

@@ -17,8 +17,8 @@ Treat the user-provided outline as the source of truth for the main body. Do not
 4. Inspect the chapter `\input{...}` block in `dokument.tex` and align it with the user-provided outline.
 5. Create, rename, remove, or reorder files in `kapitel/` so each top-level chapter of the agreed outline is represented cleanly.
 6. Edit main content in `kapitel/`, supporting pages in `meta/`, and appendix material in `anhang/`.
-5. Build with `scripts/build_document.sh <target-dir>`.
-6. Clean auxiliary files with `scripts/clean_document.sh <target-dir>` when needed.
+7. Build with `scripts/build_document.sh <target-dir>`.
+8. Clean auxiliary files with `scripts/clean_document.sh <target-dir>` when needed.
 
 ## Bundled Resources
 
@@ -39,6 +39,9 @@ Treat the user-provided outline as the source of truth for the main body. Do not
 - Add bibliography entries to `bib/literatur.bib` instead of hardcoding source data in chapters.
 - Use the existing acronym setup in `meta/abkuerzungen.tex` and `meta/abkuerzungsverzeichnis.tex`.
 - Move large code listings, wide tables, and supplementary evidence into the appendix when that improves readability.
+- Generate Mermaid code blocks directly in the relevant `.tex` chapter files when the user needs flowcharts, sequence diagrams, gantt charts, or other Mermaid-based documentation artifacts.
+- Treat Mermaid in this template as documented source notation, usually via `lstlisting`, not as a native LaTeX renderer.
+- If the diagram must also appear visually in the PDF, add a LaTeX-native representation alongside the Mermaid source, for example with TikZ or `pgfgantt`.
 - Follow German-language academic conventions unless the user explicitly requests another language.
 - If the user has no outline yet, help formulate one first; only then translate it into the LaTeX structure.
 
