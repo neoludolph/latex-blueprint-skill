@@ -1,4 +1,4 @@
 interface:
   display_name: "LaTeX Blueprint"
-  short_description: "German academic LaTeX scaffold"
-  default_prompt: "Use $latex-blueprint to install and adapt a structured German scientific LaTeX template in this workspace."
+  short_description: "German academic LaTeX with dynamic outline"
+  default_prompt: "Use $latex-blueprint to install and adapt the German scientific LaTeX template in this workspace based on my agreed outline."

@@ -10,11 +10,12 @@
   </p>
 </div>
 
-This repository provides a complete LaTeX scaffold for reports, seminar papers, and thesis-like documents.
+This repository provides a complete LaTeX scaffold for German-language reports, seminar papers, bachelor projects, and thesis-like documents.
 
 ## Highlights
 
 - Clean chapter-based structure (`kapitel/`, `anhang/`, `meta/`, `bib/`, `bilder/`)
+- Dynamic main-body outline based on your own agreed chapter structure
 - KOMA-Script setup with consistent typography and page layout
 - Ready-to-use examples for:
   - citations and bibliography (`biblatex` + `bibtex`)
@@ -29,8 +30,8 @@ This repository provides a complete LaTeX scaffold for reports, seminar papers, 
 .
 |-- dokument.tex                      # Main entry point
 |-- kapitel/
-|   |-- kapitel1.tex                  # Guide and onboarding
-|   `-- kapitel2.tex                  # Feature examples
+|   |-- kapitel1.tex                  # Example chapter, replace as needed
+|   `-- kapitel2.tex                  # Example chapter, replace as needed
 |-- meta/
 |   |-- titelblatt.tex
 |   |-- abkuerzungsverzeichnis.tex
@@ -50,9 +51,11 @@ This repository provides a complete LaTeX scaffold for reports, seminar papers, 
 ## Quick Start
 
 1. Edit metadata in `dokument.tex` (author, title, field of study, etc.).
-2. Adjust supporting files in `meta/` (title page, acronyms, declarations).
-3. Write your content in `kapitel/` and optional appendix material in `anhang/`.
-4. Build the document to generate `dokument.pdf`.
+2. Define the outline of your work and map each main chapter to its own file in `kapitel/`.
+3. Update the chapter `\input{kapitel/...}` block in `dokument.tex` to match your outline.
+4. Adjust supporting files in `meta/` (title page, acronyms, declarations).
+5. Write your content in `kapitel/` and optional appendix material in `anhang/`.
+6. Build the document to generate `dokument.pdf`.
 
 ## Build
 
@@ -84,5 +87,6 @@ make clean-all  # aggressive cleanup (keeps only core source/output files)
 ## Notes
 
 - The template is configured for German-language documents (`babel` with `ngerman`).
+- The template layout is fixed, but the chapter structure of the main body is intentionally flexible.
 - Bibliography backend is set to `bibtex` in `dokument.tex`.
 - `.gitignore` already covers common LaTeX build artifacts.
