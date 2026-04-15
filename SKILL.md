@@ -43,6 +43,7 @@ Treat the user-provided outline as the source of truth for the main body. Do not
 - Treat Mermaid in this template as documented source notation, usually via `lstlisting`, not as a native LaTeX renderer.
 - If the diagram must also appear visually in the PDF, add a LaTeX-native representation alongside the Mermaid source, for example with TikZ or `pgfgantt`.
 - Follow German-language academic conventions unless the user explicitly requests another language.
+- For scientific prose (for example in seminar papers, bachelor projects, and bachelor theses), write in continuous prose by default; do not output bullet-point lists unless the user explicitly asks for list format.
 - If the user has no outline yet, help formulate one first; only then translate it into the LaTeX structure.
 
 ## Build Notes
