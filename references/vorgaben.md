@@ -48,6 +48,16 @@ Nutze diese Referenz, wenn eine deutschsprachige wissenschaftliche Arbeit in das
 - `Evaluation` oder `Diskussion`: Einordnung, Interpretation, Grenzen, Vergleich mit Erwartung oder Literatur.
 - `Fazit und Ausblick`: Beantwortung der Fragestellung, wichtigste Erkenntnisse, weitere Forschung.
 
+## Zitierweise
+
+- Standard ist Chicago Notes and Bibliography gemaess Empfehlung des RH-Leitfadens: Quellennachweise erscheinen als nummerierte Fussnote unmittelbar nach Zitat oder Paraphrase, im Anhang folgt das alphabetisch sortierte Literaturverzeichnis.
+- Technisch ist dies im Template ueber `\usepackage[notes,backend=biber,autocite=footnote,ibidtracker=false]{biblatex-chicago}` umgesetzt; `\autocite` bzw. der Wrapper `\customcite` setzt die Quelle automatisch in eine Fussnote.
+- Im Fliesstext mit `\customcite{schluessel}` oder `\customcite[S.~42]{schluessel}` zitieren; nicht auf numerische, alphabetische oder Autor-Jahr-Zitate im Text wechseln, ausser der User verlangt es ausdruecklich.
+- Woertliche Zitate kurz und selten halten, in der Regel paraphrasieren; jede fremde Aussage muss als Zitat gekennzeichnet sein.
+- Jeder Eintrag im Literaturverzeichnis muss im Text per Fussnote belegt sein und umgekehrt; verwaiste Eintraege auf beiden Seiten vermeiden.
+- Build-Pipeline nutzt biber, nicht bibtex (`latexmk -pdf` oder `pdflatex`/`biber`/`pdflatex`/`pdflatex`).
+- Wenn der User einen anderen Stil (APA, IEEE, Vancouver) verlangt, gemeinsam mit dem User die `biblatex`-Konfiguration in `dokument.tex` und ggf. die Build-Pipeline anpassen, anstatt die Zitate stilfremd haendisch zu setzen.
+
 ## Wiederkehrende Zusatzteile
 
 - `Kurzfassung/Abstract`: in `meta/`, nicht als normales Kapitel.

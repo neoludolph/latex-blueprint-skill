@@ -37,6 +37,8 @@ Treat the user-provided outline as the source of truth for the main body. Do not
 - Reflect the outline in the `\input{kapitel/...}` lines of `dokument.tex`; do not leave obsolete sample chapters wired in once the real structure is known.
 - Prefer descriptive filenames derived from chapter titles when restructuring `kapitel/`, for example `kapitel/einleitung.tex` or `kapitel/methodik.tex`.
 - Add bibliography entries to `bib/literatur.bib` instead of hardcoding source data in chapters.
+- Use the Chicago Notes-and-Bibliography citation style configured via `biblatex-chicago` (biber backend, `autocite=footnote`). Cite sources with `\customcite{schluessel}` or `\customcite[S.~42]{schluessel}` so the reference appears as a footnote and is automatically listed in the alphabetic bibliography. Do not switch to numeric, alphabetic, or in-text author-year citations unless the user explicitly requests another style.
+- Every footnote citation must have a matching entry in `bib/literatur.bib`, and every bib entry must be cited at least once — no orphan entries on either side.
 - Use the existing acronym setup in `meta/abkuerzungen.tex` and `meta/abkuerzungsverzeichnis.tex`.
 - Move large code listings, wide tables, and supplementary evidence into the appendix when that improves readability.
 - Generate Mermaid code blocks directly in the relevant `.tex` chapter files when the user needs flowcharts, sequence diagrams, gantt charts, or other Mermaid-based documentation artifacts.
@@ -58,9 +60,11 @@ scripts/build_document.sh <target-dir>
 
 ```bash
 pdflatex dokument.tex
-bibtex dokument
+biber dokument
 pdflatex dokument.tex
 pdflatex dokument.tex
 ```
+
+`biblatex-chicago` requires the `biber` backend; do not call `bibtex` here.
 
 - Use `references/vorgaben.md` when the user needs optional German structure patterns for Praxisberichte, Bachelorprojekte, or Bachelorthesen, or when you need rules for mapping an agreed outline into `kapitel/` files.

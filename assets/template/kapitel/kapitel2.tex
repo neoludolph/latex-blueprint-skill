@@ -4,11 +4,13 @@
 Dieses Kapitel zeigt typische Elemente, die in dieser LaTeX-Vorlage bereits vorbereitet sind.
 
 \section{Zitate und Literaturverzeichnis}
-Das Literaturmanagement ist in der Vorlage vorkonfiguriert. Beispielzitate:
+Das Literaturmanagement ist in der Vorlage gemaess Chicago Notes and Bibliography vorkonfiguriert. Quellennachweise erscheinen als Fussnote unmittelbar nach Zitat oder Paraphrase, im Anhang folgt das alphabetisch sortierte Literaturverzeichnis. Verwende dafuer den Befehl \verb|\customcite|, optional mit Seitenangabe als optionalem Argument.
+
+Beispielzitate (jeweils als Fussnote):
 \begin{itemize}
-    \item Leitfaden zum wissenschaftlichen Schreiben mit LaTeX: \cite{mustermann2023}.
-    \item Beispielartikel zur Vorlagenarbeit: \cite{doe2024}.
-    \item Offizielle Projektseite von LaTeX: \cite{latexproject}.
+    \item Leitfaden zum wissenschaftlichen Schreiben mit LaTeX.\customcite{mustermann2023}
+    \item Beispielartikel zur Vorlagenarbeit.\customcite[S.~12]{doe2024}
+    \item Offizielle Projektseite von LaTeX.\customcite{latexproject}
 \end{itemize}
 Das Literaturverzeichnis wird aus der Datei \texttt{bib/literatur.bib} automatisch erzeugt.
 
@@ -159,7 +161,7 @@ import subprocess
 
 steps = [
     "pdflatex dokument.tex",
-    "bibtex dokument",
+    "biber dokument",
     "pdflatex dokument.tex",
     "pdflatex dokument.tex",
 ]

@@ -106,20 +106,27 @@
 \usepackage[htt]{hyphenat} % Erlaubt Silbentrennung in \texttt{} (Typewriter)
 
 % Zitate, Quotes, Cite
-\usepackage[backend=bibtex, sorting=nyt, style=ieee-alphabetic, minalphanames=1, maxbibnames=99]{biblatex}
+% Chicago Notes and Bibliography (Empfehlung des Leitfadens):
+% Quellennachweise erscheinen als Fußnote, im Anhang folgt das alphabetisch
+% sortierte Literaturverzeichnis. \autocite (durch \customcite gekapselt) setzt
+% die Quelle automatisch in eine Fußnote.
+\usepackage[notes,backend=biber,autocite=footnote,ibidtracker=false]{biblatex-chicago}
 \addbibresource{bib/literatur.bib}  % Pfad zur Literaturdatenbank
 
-\DeclareLabelalphaTemplate{
-  \labelelement{
-    \field[final]{shorthand}
-    \field{label}
-    \field[strwidth=3,strside=left]{labelname}
-  }
-  \labelelement{
-    \field[strwidth=2,strside=right]{year}    
-  }
-}
+% Sortierung im Literaturverzeichnis: Nachname, Vorname
+\DeclareNameAlias{sortname}{family-given}
+\DefineBibliographyStrings{german}{andothers = {{et\,al\adddot}},}
 \usepackage{csquotes}
+
+% Komfort-Befehl für Quellennachweise mit optionaler Seitenangabe.
+% Verwendung: \customcite{schluessel} oder \customcite[S.~42]{schluessel}.
+\newcommand{\customcite}[2][]{%
+  \ifblank{#1}{%
+    \autocite{#2}%
+  }{%
+    \autocite[#1]{#2}%
+  }%
+}
 
 \usepackage{listings}
 \usepackage{color}

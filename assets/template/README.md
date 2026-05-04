@@ -5,7 +5,7 @@
   <p>
     <img alt="LaTeX" src="https://img.shields.io/badge/LaTeX-KOMA--Script-00897B?logo=latex&logoColor=white">
     <img alt="Language" src="https://img.shields.io/badge/Language-German-1E88E5">
-    <img alt="Build" src="https://img.shields.io/badge/Build-pdflatex%20%2B%20bibtex-F57C00">
+    <img alt="Build" src="https://img.shields.io/badge/Build-pdflatex%20%2B%20biber-F57C00">
     <img alt="Output" src="https://img.shields.io/badge/Output-PDF-455A64">
   </p>
 </div>
@@ -18,7 +18,7 @@ This repository provides a complete LaTeX scaffold for German-language reports, 
 - Dynamic main-body outline based on your own agreed chapter structure
 - KOMA-Script setup with consistent typography and page layout
 - Ready-to-use examples for:
-  - citations and bibliography (`biblatex` + `bibtex`)
+  - citations and bibliography (`biblatex-chicago` Notes and Bibliography + `biber`, footnote-style with `\customcite`)
   - figures, tables, and code listings
   - TikZ diagrams and Gantt charts (`pgfgantt`)
   - acronyms and appendix indexes
@@ -61,7 +61,7 @@ This repository provides a complete LaTeX scaffold for German-language reports, 
 
 ```bash
 pdflatex dokument.tex
-bibtex dokument
+biber dokument
 pdflatex dokument.tex
 pdflatex dokument.tex
 ```
@@ -69,7 +69,7 @@ pdflatex dokument.tex
 Alternative using `latexmk`:
 
 ```bash
-latexmk -pdf -bibtex dokument.tex
+latexmk -pdf dokument.tex
 ```
 
 ## Cleanup
@@ -88,5 +88,5 @@ make clean-all  # aggressive cleanup (keeps only core source/output files)
 
 - The template is configured for German-language documents (`babel` with `ngerman`).
 - The template layout is fixed, but the chapter structure of the main body is intentionally flexible.
-- Bibliography backend is set to `bibtex` in `dokument.tex`.
+- Bibliography backend is `biber` with `biblatex-chicago` (Notes and Bibliography) in `dokument.tex`. Cite sources via `\customcite{key}` or `\customcite[S.~42]{key}`; the reference appears as a footnote and is added to the alphabetic bibliography automatically.
 - `.gitignore` already covers common LaTeX build artifacts.
